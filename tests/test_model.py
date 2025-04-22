@@ -5,7 +5,10 @@ from src.model import ChurnModel
 
 @pytest.fixture
 def sample_data():
-    """Create sample data for testing the model."""
+    """
+    Create sample data for testing the model.
+    """
+    
     # Create random data
     np.random.seed(42)
     X_train = np.random.rand(100, 10)
@@ -18,7 +21,10 @@ def sample_data():
     return X_train, y_train, X_val, y_val, X_test, y_test
 
 def test_model_init():
-    """Test model initialization."""
+    """
+    Test model initialization.
+    """
+
     model = ChurnModel(input_shape=10)
     
     # Check if model is a Sequential model
@@ -34,7 +40,10 @@ def test_model_init():
     assert model.model.layers[-1].activation.__name__ == 'sigmoid'
 
 def test_model_compile():
-    """Test if the model is compiled correctly."""
+    """
+    Test if the model is compiled correctly.
+    """
+
     model = ChurnModel(input_shape=10)
     
     # Check if the model is compiled
@@ -43,7 +52,10 @@ def test_model_compile():
     assert 'accuracy' in model.model.metrics_names
 
 def test_model_train(sample_data):
-    """Test model training."""
+    """
+    Test model training.
+    """
+
     X_train, y_train, X_val, y_val, _, _ = sample_data
     model = ChurnModel(input_shape=X_train.shape[1])
     
@@ -63,7 +75,10 @@ def test_model_train(sample_data):
     assert len(history.history['loss']) == 2
 
 def test_model_evaluate(sample_data):
-    """Test model evaluation."""
+    """
+    Test model evaluation.
+    """
+
     X_train, y_train, X_val, y_val, X_test, y_test = sample_data
     model = ChurnModel(input_shape=X_train.shape[1])
     

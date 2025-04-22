@@ -6,7 +6,10 @@ from src.preprocessor import Preprocessor
 
 @pytest.fixture
 def sample_df():
-    """Create a sample DataFrame for testing."""
+    """
+    Create a sample DataFrame for testing.
+    """
+    
     return pd.DataFrame({
         'CustomerID': [1, 2, 3],
         'Geography': ['France', 'Spain', 'Germany'],
@@ -22,14 +25,20 @@ def sample_df():
     })
 
 def test_preprocessor_init():
-    """Test Preprocessor initialization."""
+    """
+    Test Preprocessor initialization.
+    """
+    
     preprocessor = Preprocessor()
     assert isinstance(preprocessor.encoders, dict)
     assert len(preprocessor.encoders) == 0
     assert isinstance(preprocessor.scaler, StandardScaler)
 
 def test_rename_columns(sample_df):
-    """Test column renaming functionality."""
+    """
+    Test column renaming functionality.
+    """
+
     preprocessor = Preprocessor()
     renamed_df = preprocessor.rename_columns(sample_df)
     
@@ -41,6 +50,7 @@ def test_rename_columns(sample_df):
     assert list(renamed_df.columns) == expected_columns
 
 def test_encode_features(sample_df):
+
     """Test categorical feature encoding."""
     preprocessor = Preprocessor()
     columns_to_encode = ['Geography', 'Gender']
@@ -65,7 +75,10 @@ def test_encode_features(sample_df):
             assert encoded_df.loc[idx, 'Geography'] == encoded_value
 
 def test_scale_features():
-    """Test feature scaling."""
+    """
+    Test feature scaling.
+    """
+    
     preprocessor = Preprocessor()
     X = np.array([[1.0, 2.0, 3.0], [4.0, 5.0, 6.0], [7.0, 8.0, 9.0]])
     
